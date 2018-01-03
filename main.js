@@ -1,15 +1,15 @@
-const isMomHappy = false
+var isMomHappy = true
 
-const willIGetNewPhone = new Promise(
+var willIGetNewPhone = new Promise(
     function (resolve, reject) {
         if (isMomHappy) {
-            const phone = {
+            var phone = {
                 brand: 'Samsung',
                 color: 'black'
             }
             resolve(phone) // fulfilled
         } else {
-            const reason = new Error('mom is not happy')
+            var reason = new Error('mom is not happy')
             reject(reason) // reject
         }
 
@@ -17,8 +17,9 @@ const willIGetNewPhone = new Promise(
 )
 
 // call our promise
-const askMom = function () {
+var askMom = function () {
     willIGetNewPhone
+        .then(showOff)
         .then(function (fulfilled) {
             // yay, you got a new phone
             console.log(fulfilled)
@@ -30,5 +31,16 @@ const askMom = function () {
          // output: 'mom is not happy'
         })
 }
+
+var showOff = function (phone) {
+    return new Promise(
+        function (resolve, reject) {
+            var message = 'Hey friend, I have a new ' +
+                phone.color + ' ' + phone.brand + ' phone';
+
+            resolve(message);
+        }
+    );
+};
 
 askMom()
