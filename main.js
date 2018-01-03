@@ -6,14 +6,29 @@ const willIGetNewPhone = new Promise(
             const phone = {
                 brand: 'Samsung',
                 color: 'black'
-            };
+            }
             resolve(phone) // fulfilled
         } else {
-            const reason = new Error('mom is not happy');
+            const reason = new Error('mom is not happy')
             reject(reason) // reject
         }
 
     }
-);
+)
 
-console.log(willIGetNewPhone)
+// call our promise
+const askMom = function () {
+    willIGetNewPhone
+        .then(function (fulfilled) {
+            // yay, you got a new phone
+            console.log(fulfilled)
+         // output: { brand: 'Samsung', color: 'black' }
+        })
+        .catch(function (error) {
+            // oops, mom don't buy it
+            console.log(error.message)
+         // output: 'mom is not happy'
+        })
+}
+
+askMom()
